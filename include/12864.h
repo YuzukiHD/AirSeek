@@ -3,10 +3,11 @@
 
 #define AR_SIZE(a) sizeof(a) / sizeof(a[0])
 
-unsigned char TEMPCHAR[] = {0xCE, 0xC2, 0xB6, 0xC8, 0x3A, 0x00};
-unsigned char CCHAR[] = "C";
+unsigned char TEMPCHAR[] = {0xCE, 0xC2, 0xB6, 0xC8};
 
-char* temp(double t) {
+unsigned char HUMCHAR[] = {0xCA, 0xAA, 0xB6, 0xC8};
+
+char* i2c(double t) {
   static char buffer[10];
   sprintf(buffer, "%d", static_cast<int>(t));
   return buffer;
