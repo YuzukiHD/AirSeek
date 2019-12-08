@@ -45,8 +45,8 @@ DHT::DHT(uint8_t pin, uint8_t type, uint8_t count) {
   _port = digitalPinToPort(pin);
 #endif
   _maxcycles =
-      microsecondsToClockCycles(1000); // 1 millisecond timeout for
-                                       // reading pulses from DHT sensor.
+      microsecondsToClockCycles(1000);  // 1 millisecond timeout for
+                                        // reading pulses from DHT sensor.
   // Note that count is now ignored as the DHT reading algorithm adjusts itself
   // based on the speed of the processor.
 }
@@ -84,37 +84,37 @@ float DHT::readTemperature(bool S, bool force) {
 
   if (read(force)) {
     switch (_type) {
-    case DHT11:
-      f = data[2];
-      if (data[3] & 0x80) {
-        f = -1 - f;
-      }
-      f += (data[3] & 0x0f) * 0.1;
-      if (S) {
-        f = convertCtoF(f);
-      }
-      break;
-    case DHT12:
-      f = data[2];
-      f += (data[3] & 0x0f) * 0.1;
-      if (data[2] & 0x80) {
-        f *= -1;
-      }
-      if (S) {
-        f = convertCtoF(f);
-      }
-      break;
-    case DHT22:
-    case DHT21:
-      f = ((word)(data[2] & 0x7F)) << 8 | data[3];
-      f *= 0.1;
-      if (data[2] & 0x80) {
-        f *= -1;
-      }
-      if (S) {
-        f = convertCtoF(f);
-      }
-      break;
+      case DHT11:
+        f = data[2];
+        if (data[3] & 0x80) {
+          f = -1 - f;
+        }
+        f += (data[3] & 0x0f) * 0.1;
+        if (S) {
+          f = convertCtoF(f);
+        }
+        break;
+      case DHT12:
+        f = data[2];
+        f += (data[3] & 0x0f) * 0.1;
+        if (data[2] & 0x80) {
+          f *= -1;
+        }
+        if (S) {
+          f = convertCtoF(f);
+        }
+        break;
+      case DHT22:
+      case DHT21:
+        f = ((word)(data[2] & 0x7F)) << 8 | data[3];
+        f *= 0.1;
+        if (data[2] & 0x80) {
+          f *= -1;
+        }
+        if (S) {
+          f = convertCtoF(f);
+        }
+        break;
     }
   }
   return f;
@@ -126,7 +126,9 @@ float DHT::readTemperature(bool S, bool force) {
  *					value in Celcius
  *	@return float value in Fahrenheit
  */
-float DHT::convertCtoF(float c) { return c * 1.8 + 32; }
+float DHT::convertCtoF(float c) {
+  return c * 1.8 + 32;
+}
 
 /*!
  *  @brief  Converts Fahrenheit to Celcius
@@ -134,7 +136,9 @@ float DHT::convertCtoF(float c) { return c * 1.8 + 32; }
  *					value in Fahrenheit
  *	@return float value in Celcius
  */
-float DHT::convertFtoC(float f) { return (f - 32) * 0.55555; }
+float DHT::convertFtoC(float f) {
+  return (f - 32) * 0.55555;
+}
 
 /*!
  *  @brief  Read Humidity
@@ -146,15 +150,15 @@ float DHT::readHumidity(bool force) {
   float f = NAN;
   if (read(force)) {
     switch (_type) {
-    case DHT11:
-    case DHT12:
-      f = data[0] + data[1] * 0.1;
-      break;
-    case DHT22:
-    case DHT21:
-      f = ((word)data[0]) << 8 | data[1];
-      f *= 0.1;
-      break;
+      case DHT11:
+      case DHT12:
+        f = data[0] + data[1] * 0.1;
+        break;
+      case DHT22:
+      case DHT21:
+        f = ((word)data[0]) << 8 | data[1];
+        f *= 0.1;
+        break;
     }
   }
   return f;
@@ -164,8 +168,8 @@ float DHT::readHumidity(bool force) {
  *  @brief  Compute Heat Index
  *          Simplified version that reads temp and humidity from sensor
  *  @param  isFahrenheit
- * 					true if fahrenheit, false if celcius (default
- *true)
+ * 					true if fahrenheit, false if celcius
+ *(default true)
  *	@return float heat index
  */
 float DHT::computeHeatIndex(bool isFahrenheit) {
@@ -186,7 +190,8 @@ float DHT::computeHeatIndex(bool isFahrenheit) {
  * 					true if fahrenheit, false if celcius
  *	@return float heat index
  */
-float DHT::computeHeatIndex(float temperature, float percentHumidity,
+float DHT::computeHeatIndex(float temperature,
+                            float percentHumidity,
                             bool isFahrenheit) {
   float hi;
 
@@ -230,7 +235,7 @@ bool DHT::read(bool force) {
   // to use last reading.
   uint32_t currenttime = millis();
   if (!force && ((currenttime - _lastreadtime) < MIN_INTERVAL)) {
-    return _lastresult; // return last correct measurement
+    return _lastresult;  // return last correct measurement
   }
   _lastreadtime = currenttime;
 
@@ -238,7 +243,7 @@ bool DHT::read(bool force) {
   data[0] = data[1] = data[2] = data[3] = data[4] = 0;
 
 #if defined(ESP8266)
-  yield(); // Handle WiFi / reset software watchdog
+  yield();  // Handle WiFi / reset software watchdog
 #endif
 
   // Send start signal.  See DHT datasheet for full signal diagram:
@@ -253,14 +258,14 @@ bool DHT::read(bool force) {
   pinMode(_pin, OUTPUT);
   digitalWrite(_pin, LOW);
   switch (_type) {
-  case DHT22:
-  case DHT21:
-    delayMicroseconds(1100); // data sheet says "at least 1ms"
-    break;
-  case DHT11:
-  default:
-    delay(20); // data sheet says at least 18ms, 20ms just to be safe
-    break;
+    case DHT22:
+    case DHT21:
+      delayMicroseconds(1100);  // data sheet says "at least 1ms"
+      break;
+    case DHT11:
+    default:
+      delay(20);  // data sheet says at least 18ms, 20ms just to be safe
+      break;
   }
 
   uint32_t cycles[80];
@@ -279,12 +284,12 @@ bool DHT::read(bool force) {
 
     // First expect a low signal for ~80 microseconds followed by a high signal
     // for ~80 microseconds again.
-    if (expectPulse(LOW) == TIMEOUT) {
+    if (expectPulse(LOW) == static_cast<uint32_t>(TIMEOUT)) {
       DEBUG_PRINTLN(F("DHT timeout waiting for start signal low pulse."));
       _lastresult = false;
       return _lastresult;
     }
-    if (expectPulse(HIGH) == TIMEOUT) {
+    if (expectPulse(HIGH) == static_cast<uint32_t>(TIMEOUT)) {
       DEBUG_PRINTLN(F("DHT timeout waiting for start signal high pulse."));
       _lastresult = false;
       return _lastresult;
@@ -302,14 +307,15 @@ bool DHT::read(bool force) {
       cycles[i] = expectPulse(LOW);
       cycles[i + 1] = expectPulse(HIGH);
     }
-  } // Timing critical code is now complete.
+  }  // Timing critical code is now complete.
 
   // Inspect pulses and determine which ones are 0 (high state cycle count < low
   // state cycle count), or 1 (high state cycle count > low state cycle count).
   for (int i = 0; i < 40; ++i) {
     uint32_t lowCycles = cycles[2 * i];
     uint32_t highCycles = cycles[2 * i + 1];
-    if ((lowCycles == TIMEOUT) || (highCycles == TIMEOUT)) {
+    if ((lowCycles == static_cast<uint32_t>(TIMEOUT)) ||
+        (highCycles == static_cast<uint32_t>(TIMEOUT))) {
       DEBUG_PRINTLN(F("DHT timeout waiting for pulse."));
       _lastresult = false;
       return _lastresult;
@@ -360,7 +366,7 @@ uint32_t DHT::expectPulse(bool level) {
 #if (F_CPU > 16000000L)
   uint32_t count = 0;
 #else
-  uint16_t count = 0; // To work fast enough on slower AVR boards
+  uint16_t count = 0;  // To work fast enough on slower AVR boards
 #endif
 // On AVR platforms use direct GPIO port access as it's much faster and better
 // for catching pulses that are 10's of microseconds in length:
@@ -368,7 +374,7 @@ uint32_t DHT::expectPulse(bool level) {
   uint8_t portState = level ? _bit : 0;
   while ((*portInputRegister(_port) & _bit) == portState) {
     if (count++ >= _maxcycles) {
-      return TIMEOUT; // Exceeded timeout, fail.
+      return TIMEOUT;  // Exceeded timeout, fail.
     }
   }
 // Otherwise fall back to using digitalRead (this seems to be necessary on
@@ -376,7 +382,7 @@ uint32_t DHT::expectPulse(bool level) {
 #else
   while (digitalRead(_pin) == level) {
     if (count++ >= _maxcycles) {
-      return TIMEOUT; // Exceeded timeout, fail.
+      return TIMEOUT;  // Exceeded timeout, fail.
     }
   }
 #endif
