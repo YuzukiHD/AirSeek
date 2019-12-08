@@ -12,11 +12,12 @@ void setup() {
 }
 
 void loop() {
-  int h = dht.readHumidity();
-  int t = dht.readTemperature();
+  double h = dht.readHumidity();
+  double t = dht.readTemperature();
 
   if (isnan(h) || isnan(t)) {
     Serial.println(F("Failed to read from DHT sensor!"));
+    delay(1000);
     return;
   }
 
