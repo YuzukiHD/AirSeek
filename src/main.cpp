@@ -34,7 +34,6 @@ void loop() {
   Serial.print(t);
   Serial.print(F("°C "));
   Serial.println("");
-  Serial.println(mq135());
 
   unsigned char* dateStr = (unsigned char*)getMDStr();
   LCDA.DisplayString(0, 0, dateStr, 5);

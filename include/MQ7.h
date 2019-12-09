@@ -4,6 +4,5 @@ int mq7() {
   static int val;
   val = analogRead(2);
   val = val / 10;
-  Serial.println(val);
   return val;
 }
