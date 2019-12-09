@@ -29,9 +29,10 @@ void setup() {
   Serial.begin(9600);  // 定义串口波特率
   LCDA.CLEAR();        // 清屏
 
-  pinMode(10, OUTPUT);  // 输出LED R
-  pinMode(11, OUTPUT);  // 输出LED G
-  pinMode(12, OUTPUT);  // 输出LED B
+  // pinMode(10, OUTPUT);  // 输出LED R
+  // pinMode(11, OUTPUT);  // 输出LED G
+  // pinMode(12, OUTPUT);  // 输出LED B
+  
   // 设置时间
   // rtc.setDOW(MONDAY);        // Set Day-of-Week to FRIDAY
   // rtc.setTime(22, 25, 0);    // Set the time to 12:00:00 (24hr format)
