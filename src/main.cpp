@@ -34,10 +34,8 @@ void loop() {
   Serial.println("");
   Serial.println(mq135());
 
-  LCDA.DisplayString(0, 0, clock, 2);
-
   unsigned char* dateStr = (unsigned char*)getMDStr();
-  LCDA.DisplayString(1, 0, dateStr, 5);
+  LCDA.DisplayString(0, 0, dateStr, 5);
 
   unsigned char* timeStr = (unsigned char*)rtc.getTimeStr();
   LCDA.DisplayString(0, 4, timeStr, 8);
