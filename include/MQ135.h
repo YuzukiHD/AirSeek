@@ -1,4 +1,4 @@
-unsigned char* MQNH3 = (unsigned char*)"NH3";
+unsigned char* MQNH3 = (unsigned char*)"NH3:";
 
 int mq135() {
   static int val;

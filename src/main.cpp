@@ -2,6 +2,8 @@
 #include "12864.h"
 #include "DHT11.h"
 #include "MQ135.h"
+#include "MQ7.h"
+#include "CH2O.h"
 #include "time1302.h"
 
 void setup() {
@@ -45,8 +47,13 @@ void loop() {
   LCDA.DisplayString(1, 4, HUMCHAR, AR_SIZE(HUMCHAR));
   LCDA.DisplayString(1, 6, (unsigned char*)i2c(h), AR_SIZE(i2c(h)));
 
-  LCDA.DisplayString(2, 0, MQNH3, 3);
+  LCDA.DisplayString(2, 0, MQNH3, 4);
   LCDA.DisplayString(2, 2, (unsigned char*)i2c(mq135()), 2);
+  LCDA.DisplayString(2, 4, MQCO, 4);
+  LCDA.DisplayString(2, 6, (unsigned char*)i2c(mq7()), 2);
+
+  LCDA.DisplayString(3, 0, CH2OSTR, 6);
+  LCDA.DisplayString(3, 3, (unsigned char*)i2c(ch2o_mod()), 2);
 
   delay(1000);
 }
