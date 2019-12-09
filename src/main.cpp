@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "12864.h"
 #include "DHT11.h"
+#include "MQ135.h"
 #include "time1302.h"
 
 void setup() {
@@ -31,16 +32,23 @@ void loop() {
   Serial.print(t);
   Serial.print(F("°C "));
   Serial.println("");
-  unsigned char* timeStr = (unsigned char*)rtc.getTimeStr();
-  LCDA.DisplayString(0, 0, timeStr, 8);
+  Serial.println(mq135());
+
+  LCDA.DisplayString(0, 0, clock, 2);
 
   unsigned char* dateStr = (unsigned char*)getMDStr();
-  LCDA.DisplayString(0, 5, dateStr, 5);
+  LCDA.DisplayString(1, 0, dateStr, 5);
+
+  unsigned char* timeStr = (unsigned char*)rtc.getTimeStr();
+  LCDA.DisplayString(0, 4, timeStr, 8);
 
   LCDA.DisplayString(1, 0, TEMPCHAR, AR_SIZE(TEMPCHAR));
   LCDA.DisplayString(1, 2, (unsigned char*)i2c(t), AR_SIZE(i2c(t)));
   LCDA.DisplayString(1, 4, HUMCHAR, AR_SIZE(HUMCHAR));
   LCDA.DisplayString(1, 6, (unsigned char*)i2c(h), AR_SIZE(i2c(h)));
+
+  LCDA.DisplayString(2, 0, MQNH3, 3);
+  LCDA.DisplayString(2, 2, (unsigned char*)i2c(mq135()), 2);
 
   delay(1000);
 }

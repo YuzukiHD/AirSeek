@@ -2,6 +2,8 @@
 
 DS1302 rtc(7, 8, 9);
 
+unsigned char clock[] = {};
+
 char* getMDStr() {
   static char buffer[10];
   Time t = rtc.getTime();
