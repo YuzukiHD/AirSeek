@@ -39,7 +39,7 @@ void setup() {
   // rtc.setDOW(MONDAY);        // Set Day-of-Week to FRIDAY
   // rtc.setTime(20, 43, 0);    // Set the time to 12:00:00 (24hr format)
   // rtc.setDate(12, 12, 2019);  // Set the date to August 6th, 2010
-  delay(1000);  // 等待一秒
+  delay(3000);  // 等待一秒
 }
 
 void loop() {
