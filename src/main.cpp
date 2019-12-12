@@ -29,6 +29,7 @@ void setup() {
   Serial.begin(9600);  // 定义串口波特率
   LCDA.DisplayString(0, 0, STARTUP_0, AR_SIZE(STARTUP_0));  // 欢迎界面
   LCDA.DisplayString(1, 0, STARTUP_1, AR_SIZE(STARTUP_1));  // 欢迎界面
+  delay(3000);  // 等待3秒  
   LCDA.CLEAR();                                             // 清屏
 
   // pinMode(10, OUTPUT);  // 输出LED R
@@ -39,7 +40,6 @@ void setup() {
   // rtc.setDOW(MONDAY);        // Set Day-of-Week to FRIDAY
   // rtc.setTime(20, 43, 0);    // Set the time to 12:00:00 (24hr format)
   // rtc.setDate(12, 12, 2019);  // Set the date to August 6th, 2010
-  delay(3000);  // 等待一秒
 }
 
 void loop() {
