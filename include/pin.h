@@ -4,6 +4,7 @@
 #define RTCRST 12
 #define MQ7 7
 #define MQ135 1
+#define CH2O 5
 
 #define LCDRS 4  // latchPin
 #define LCDRW 5  // dataPin

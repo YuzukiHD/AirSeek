@@ -3,6 +3,10 @@
 
 #define AR_SIZE(a) sizeof(a) / sizeof(a[0])
 
+unsigned char STARTUP_0[] = "STARTING...";
+
+unsigned char STARTUP_1[] = "STARTING...";
+
 unsigned char TEMPCHAR[] = "TEM:";
 
 unsigned char HUMCHAR[] = "HUM:";

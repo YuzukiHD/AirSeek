@@ -27,7 +27,9 @@ void setup() {
   dht.begin();         // 初始化DHT模块
   LCDA.Initialise();   // 初始化LCD模块
   Serial.begin(9600);  // 定义串口波特率
-  LCDA.CLEAR();        // 清屏
+  LCDA.DisplayString(0, 0, STARTUP_0, AR_SIZE(STARTUP_0));  // 欢迎界面
+  LCDA.DisplayString(1, 0, STARTUP_1, AR_SIZE(STARTUP_1));  // 欢迎界面
+  LCDA.CLEAR();                                             // 清屏
 
   // pinMode(10, OUTPUT);  // 输出LED R
   // pinMode(11, OUTPUT);  // 输出LED G
