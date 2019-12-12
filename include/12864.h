@@ -3,7 +3,7 @@
 
 #define AR_SIZE(a) sizeof(a) / sizeof(a[0])
 
-unsigned char STARTUP_0[] = "STARTING...";
+unsigned char STARTUP_0[] = "AirSeek V1.0";
 
 unsigned char STARTUP_1[] = "STARTING...";
 
