@@ -1,6 +1,7 @@
 #include <DS1302.h>
+#include "pin.h"
 
-DS1302 rtc(7, 8, 9);
+DS1302 rtc(RTCRST, RTCDAT, RTCCLK);
 
 unsigned char clock[] = {};
 

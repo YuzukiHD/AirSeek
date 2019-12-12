@@ -32,11 +32,11 @@ void setup() {
   // pinMode(10, OUTPUT);  // 输出LED R
   // pinMode(11, OUTPUT);  // 输出LED G
   // pinMode(12, OUTPUT);  // 输出LED B
-  
+
   // 设置时间
   // rtc.setDOW(MONDAY);        // Set Day-of-Week to FRIDAY
-  // rtc.setTime(22, 25, 0);    // Set the time to 12:00:00 (24hr format)
-  // rtc.setDate(9, 12, 2019);  // Set the date to August 6th, 2010
+  // rtc.setTime(20, 43, 0);    // Set the time to 12:00:00 (24hr format)
+  // rtc.setDate(12, 12, 2019);  // Set the date to August 6th, 2010
 }
 
 void loop() {

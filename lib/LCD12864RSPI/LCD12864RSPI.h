@@ -1,10 +1,12 @@
-// Demo LCD12864 spi
-// www.dfrobot.com
 #include <Arduino.h>
 #ifndef LCD12864RSPI_h
 #define LCD12864RSPI_h
 #include <avr/pgmspace.h>
 #include <inttypes.h>
+
+#define LCDRS 4  // latchPin
+#define LCDRW 5  // dataPin
+#define LCDE 6   // clockPin
 
 class LCD12864RSPI {
   typedef unsigned char uchar;
@@ -27,9 +29,9 @@ class LCD12864RSPI {
   int delaytime;
   int DEFAULTTIME;
 
-  static const int latchPin = 5;
-  static const int clockPin = 4;
-  static const int dataPin = 6;
+  static const int latchPin = LCDRS;
+  static const int clockPin = LCDE;
+  static const int dataPin = LCDRW;
 };
 extern LCD12864RSPI LCDA;
 #endif
